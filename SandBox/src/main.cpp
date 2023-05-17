@@ -1,6 +1,24 @@
-#include "Application.h"
+#include "Magenta.h"
 
-int main()
+class SandBox : public Magenta::Application
 {
-    Run();
+public:
+    SandBox()
+    {
+
+    }
+
+    ~SandBox()
+    {
+
+    }
+};
+
+Magenta::Application* Magenta::CreateApplication()
+{
+    SandBox* app = new SandBox();
+    
+    app->InitWindow(1280, 720, "SandBox");
+
+    return app;
 }

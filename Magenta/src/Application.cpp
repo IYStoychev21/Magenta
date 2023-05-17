@@ -1,35 +1,58 @@
-#include <GLFW/glfw3.h>
 #include "Application.h"
 
-void Run()
+namespace Magenta
 {
-    GLFWwindow* window;
+    Application::Application()
+    {
 
-    /* Initialize the library */
-    glfwInit();
+    }
 
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
-    if (!window)
+    Application::~Application()
     {
         glfwTerminate();
     }
 
-    /* Make the window's context current */
-    glfwMakeContextCurrent(window);
-
-    /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window))
+    void Application::InitWindow(uint32_t width, uint32_t height, const char* title)
     {
-        /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
+        m_Width = width;
+        m_Height = height;
 
-        /* Swap front and back buffers */
-        glfwSwapBuffers(window);
+        glfwInit();
 
-        /* Poll for and process events */
-        glfwPollEvents();
+        m_Window = glfwCreateWindow(width, height, title, NULL, NULL);
+
+
+        if (!m_Window)
+        {
+            glfwTerminate();
+        }
+
+        glfwMakeContextCurrent(m_Window);
+
+        if(glewInit() != GLEW_OK)
+        {
+            glfwTerminate();
+        }
     }
 
-    glfwTerminate();
+    bool Application::WindowShouldClose()
+    {
+        bool shouldClose = false; 
+        shouldClose = glfwWindowShouldClose(m_Window);
+
+        return shouldClose;
+    }
+
+    void Application::Run()
+    {
+        while (!WindowShouldClose())
+        {
+            glClear(GL_COLOR_BUFFER_BIT);
+            glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+            glfwSwapBuffers(m_Window);
+
+            glfwPollEvents();
+        }
+    }
 }
