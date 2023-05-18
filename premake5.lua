@@ -28,7 +28,8 @@ project "SandBox"
       "vendor/GLFW/include",
       "vendor/glad/include",
       "Magenta/src",
-      "vendor/GLEW/include"
+      "vendor/GLEW/include",
+      "vendor/glm",
     }
 
     
@@ -83,7 +84,8 @@ project "Magenta"
       "%{prj.name}/src",
       "vendor/GLFW/include",
       "vendor/glad/include",
-      "vendor/GLEW/include"
+      "vendor/GLEW/include",
+      "vendor/glm",
     }
 
     libdirs

@@ -39,6 +39,8 @@ namespace Magenta
             glfwTerminate();
         }
 
+        m_Renderer.reset(Renderer::CreateRenderer());
+
         for(auto& layer : m_Layers)
         {
             layer->OnAttach();
@@ -59,11 +61,10 @@ namespace Magenta
     }
 
     void Application::Run()
-    {
+    {        
         while (!WindowShouldClose())
         {
-            glClear(GL_COLOR_BUFFER_BIT);
-            glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
+            m_Renderer->Clear();
 
             for(auto& layer : m_Layers)
             {
@@ -71,7 +72,6 @@ namespace Magenta
             }
 
             glfwSwapBuffers(m_Window);
-
             glfwPollEvents();
         }
     }

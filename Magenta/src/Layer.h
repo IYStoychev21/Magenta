@@ -1,4 +1,5 @@
 #pragma once
+#include "Renderer.h"
 
 namespace Magenta
 {
@@ -16,11 +17,14 @@ namespace Magenta
     class MagentaLayer : public Layer
     {
     public:
-        MagentaLayer() = default;
+        MagentaLayer(Renderer* renderer = nullptr) { m_Renderer = renderer; } 
         ~MagentaLayer() = default;
 
         virtual void OnAttach() = 0;
         virtual void OnDetach() = 0;
         virtual void OnUpdate() = 0;
+
+    protected:
+        Renderer* m_Renderer = nullptr;
     };
 }

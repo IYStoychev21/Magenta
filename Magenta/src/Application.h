@@ -8,6 +8,7 @@
 #include <memory>
 
 #include "Layer.h"
+#include "Renderer.h"
 
 namespace Magenta
 {
@@ -29,7 +30,10 @@ namespace Magenta
         GLFWwindow* m_Window = nullptr;
         uint32_t m_Width = 0;
         uint32_t m_Height = 0;
+
         std::vector<std::unique_ptr<Layer>> m_Layers;
+
+        std::unique_ptr<Renderer> m_Renderer;
     };
 
     // To be defined in CLIENT
