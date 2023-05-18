@@ -6,6 +6,8 @@
 #include <cstdint>
 #include <glm/glm.hpp>
 
+#include "Buffer.h"
+
 namespace Magenta
 {
     class Renderer
