@@ -31,13 +31,21 @@ namespace Magenta
             pointC.x, pointC.y, /*color.r, color.g, color.b, color.a*/
         };
 
+        uint32_t indices[] = {
+            0, 1, 2
+        };
+
         Magenta::VertexBuffer* vertexBuffer = Magenta::VertexBuffer::CreateVertexBuffer();
         vertexBuffer->Bind();
         vertexBuffer->SetData(vertices, sizeof(vertices));
 
+        Magenta::IndexBuffer* indexBuffer = Magenta::IndexBuffer::CreateIndexBuffer();
+        indexBuffer->Bind();
+        indexBuffer->SetData(indices, sizeof(indices));
+
         glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 8, 0);
 
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
     }
 }

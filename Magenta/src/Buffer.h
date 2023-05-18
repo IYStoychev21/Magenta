@@ -24,4 +24,22 @@ namespace Magenta
     private:
         uint32_t m_RendererID;
     };
+
+    class IndexBuffer
+    {
+    public:
+        IndexBuffer();
+        ~IndexBuffer();
+
+        void Bind();
+        void SetData(uint32_t* indicies, uint32_t size);
+
+        static IndexBuffer* CreateIndexBuffer()
+        {
+            return new IndexBuffer();
+        }
+
+    private:
+        uint32_t m_RendererID;
+    };
 }
