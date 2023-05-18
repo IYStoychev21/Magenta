@@ -9,6 +9,11 @@ namespace Magenta
 
     Application::~Application()
     {
+        for(auto& layer : m_Layers)
+        {
+            layer->OnDetach();
+        }
+
         glfwTerminate();
     }
 
@@ -33,6 +38,11 @@ namespace Magenta
         {
             glfwTerminate();
         }
+
+        for(auto& layer : m_Layers)
+        {
+            layer->OnAttach();
+        }
     }
 
     bool Application::WindowShouldClose()
@@ -43,12 +53,22 @@ namespace Magenta
         return shouldClose;
     }
 
+    void Application::PushLayer(Layer* layer)
+    {
+        m_Layers.push_back(std::unique_ptr<Layer>(layer));
+    }
+
     void Application::Run()
     {
         while (!WindowShouldClose())
         {
             glClear(GL_COLOR_BUFFER_BIT);
-            glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+            glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
+
+            for(auto& layer : m_Layers)
+            {
+                layer->OnUpdate();
+            }
 
             glfwSwapBuffers(m_Window);
 
