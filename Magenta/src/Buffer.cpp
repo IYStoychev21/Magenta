@@ -36,14 +36,27 @@ namespace Magenta
         }
     }
 
-    uint32_t GetStride(const std::vector<BufferElement>& elements)
+    uint32_t GetShaderTypeSize(ShaderDataType type)
     {
-        uint32_t stride = 0;
-        for (const auto& element : elements)
-        {
-            stride += GetComponentCount(element.type) * sizeof(ShaderDataTypeToOpenGLBaseType(element.type));
-        }
-        return stride;
+         switch (type)
+         {
+         case ShaderDataType::Float: return 4;
+         case ShaderDataType::Float2: return 4 * 2;
+         case ShaderDataType::Float3: return 4 * 3;
+         case ShaderDataType::Float4: return 4 * 4;
+         case ShaderDataType::Int: return 4;
+         case ShaderDataType::Int2: return 4 * 2;
+         case ShaderDataType::Int3: return 4 * 3;
+         case ShaderDataType::Int4: return 4 * 4;
+         default:
+              break;
+         }
+    } 
+
+    BufferLayout::BufferLayout(std::vector<BufferElement> elements)
+    {
+        m_BufferElements = elements;
+        CalculateStride();
     }
 
     // --------------------------- VERTEX BUFFER ---------------------------------------

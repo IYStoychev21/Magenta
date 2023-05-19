@@ -6,8 +6,10 @@
 #include <cstdint>
 #include <glm/glm.hpp>
 #include <vector>
+#include <memory>
 
 #include "Buffer.h"
+#include "Shader.h"
 
 namespace Magenta
 {
