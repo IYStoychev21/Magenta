@@ -1,5 +1,4 @@
 #include "Renderer.h"
-#include "iostream"
 
 namespace Magenta
 {
@@ -35,6 +34,10 @@ namespace Magenta
             0, 1, 2
         };
 
+        std::vector<BufferElement> elements = {
+            { "a_Position", ShaderDataType::Float2 }
+        };
+
         Magenta::VertexBuffer* vertexBuffer = Magenta::VertexBuffer::CreateVertexBuffer();
         vertexBuffer->Bind();
         vertexBuffer->SetData(vertices, sizeof(vertices));
@@ -43,8 +46,20 @@ namespace Magenta
         indexBuffer->Bind();
         indexBuffer->SetData(indices, sizeof(indices));
 
-        glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 8, 0);
+        uint32_t index = 0;
+        for(auto i : elements)
+        {
+            glEnableVertexAttribArray(index);
+
+		    glVertexAttribPointer(index, 
+            GetComponentCount(i.type), 
+            ShaderDataTypeToOpenGLBaseType(i.type), 
+            GL_FALSE, 
+            GetStride(elements), 
+            0);
+
+            index++;
+        }
 
         glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
     }

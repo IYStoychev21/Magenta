@@ -4,9 +4,28 @@
 #include <GLFW/glfw3.h>
 
 #include <cstdint>
+#include <string>
+#include <vector>
 
 namespace Magenta
 {
+    enum class ShaderDataType
+    {
+        Float, Float2, Float3, Float4,
+        Int, Int2, Int3, Int4
+    };
+
+    struct BufferElement
+    {
+        std::string name;
+        ShaderDataType type;
+        uint32_t offset = 0;
+    };
+
+    uint32_t GetComponentCount(ShaderDataType type);
+    GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type);
+    uint32_t GetStride(const std::vector<BufferElement>& elements);
+
     class VertexBuffer
     {
     public:
