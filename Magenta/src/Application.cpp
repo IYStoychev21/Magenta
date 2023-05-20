@@ -1,4 +1,5 @@
 #include "Application.h"
+#include <iostream>
 
 namespace Magenta
 {
@@ -61,7 +62,7 @@ namespace Magenta
     }
 
     void Application::Run()
-    {        
+    {
         while (!WindowShouldClose())
         {
             m_Renderer->Clear();

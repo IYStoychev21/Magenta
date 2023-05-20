@@ -124,4 +124,34 @@ namespace Magenta
     {
         glUseProgram(0);
     }
+
+	void Shader::SetUniform(ShaderDataType type, std::string uniformName, int32_t value) 
+	{
+		int32_t location = glGetUniformLocation(m_RendererID, uniformName.c_str());
+		glUniform1i(location, value);
+	}
+
+	void Shader::SetUniform(ShaderDataType type, std::string uniformName, float value)
+	{
+		int32_t location = glGetUniformLocation(m_RendererID, uniformName.c_str());
+		glUniform1f(location, value);
+	}
+
+	void Shader::SetUniform(ShaderDataType type, std::string uniformName, glm::vec2 value)
+	{
+		int32_t location = glGetUniformLocation(m_RendererID, uniformName.c_str());
+		glUniform2f(location, value.x, value.y);
+	}
+
+	void Shader::SetUniform(ShaderDataType type, std::string uniformName, glm::vec3 value)
+	{
+		int32_t location = glGetUniformLocation(m_RendererID, uniformName.c_str());
+		glUniform3f(location, value.x, value.y, value.z);
+	}
+
+	void Shader::SetUniform(ShaderDataType type, std::string uniformName, glm::vec4 value)
+	{
+		int32_t location = glGetUniformLocation(m_RendererID, uniformName.c_str());
+		glUniform4f(location, value.x, value.y, value.z, value.w);
+	}
 }
