@@ -30,6 +30,7 @@ project "SandBox"
       "Magenta/src",
       "vendor/GLEW/include",
       "vendor/glm",
+      "vendor/stb_image"
     }
 
     
@@ -76,7 +77,9 @@ project "Magenta"
     files
     {
         "%{prj.name}/src/**.cpp",
-        "%{prj.name}/src/**.h"
+        "%{prj.name}/src/**.h",
+        "vendor/stb_image/**.cpp",
+        "vendor/stb_image/**.h"
     }
     
     includedirs
@@ -86,6 +89,7 @@ project "Magenta"
       "vendor/glad/include",
       "vendor/GLEW/include",
       "vendor/glm",
+      "vendor/stb_image"
     }
 
     libdirs

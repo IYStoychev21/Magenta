@@ -35,6 +35,7 @@ public:
     void OnUpdate() override
     {
         m_Renderer->DrawBox2D(glm::vec2(-0.375f, -0.375f), glm::vec2(0.75f, 0.75f), glm::vec4(0.8f, 0.2f, 0.3f, 1.0f));
+        // m_Renderer->DrawTexture2D(glm::vec2(-0.375f, -0.375f), glm::vec2(0.75f, 0.75f), "assets/board.png");
 
         m_Renderer->ClearColor(0.8f, 0.8f, 0.8f, 1.0f);
     }
