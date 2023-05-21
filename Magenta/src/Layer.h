@@ -1,5 +1,5 @@
 #pragma once
-#include "Renderer.h"
+#include "Renderer2D.h"
 
 namespace Magenta
 {

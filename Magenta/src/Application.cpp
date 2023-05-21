@@ -46,7 +46,7 @@ namespace Magenta
             glfwTerminate();
         }
 
-        m_Renderer.reset(Renderer::CreateRenderer());
+        m_Renderer.reset(Renderer2D::CreateRenderer2D());
 
         for(auto& layer : m_Layers)
         {

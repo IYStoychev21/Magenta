@@ -8,7 +8,7 @@
 #include <memory>
 
 #include "Layer.h"
-#include "Renderer.h"
+#include "Renderer2D.h"
 
 namespace Magenta
 {
@@ -26,7 +26,7 @@ namespace Magenta
         uint32_t GetWidth() { return m_Width; }
         uint32_t GetHeight() { return m_Height; }
 
-        std::shared_ptr<Renderer> GetRenderer() { return m_Renderer; }
+        std::shared_ptr<Renderer2D> GetRenderer2D() { return m_Renderer; }
 
     private:
         bool WindowShouldClose();
@@ -38,7 +38,7 @@ namespace Magenta
 
         std::vector<std::unique_ptr<Layer>> m_Layers;
 
-        std::shared_ptr<Renderer> m_Renderer;
+        std::shared_ptr<Renderer2D> m_Renderer;
     };
 
     // To be defined in CLIENT
