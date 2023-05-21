@@ -25,6 +25,7 @@ namespace Magenta
         void DrawTriangle2D(glm::vec2 pointA, glm::vec2 pointB, glm::vec2 pointC, glm::vec4 color);
         void DrawBox2D(glm::vec2 position, glm::vec2 size, glm::vec4 color);
         void DrawCirle2D(glm::vec2 position, float radius, glm::vec4 color);
+        void DrawLine2D(glm::vec2 pointA, glm::vec2 pointB, float thickness, glm::vec4 color);
 
         static Renderer2D* CreateRenderer2D()
         {
