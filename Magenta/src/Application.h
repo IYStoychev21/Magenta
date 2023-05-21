@@ -23,6 +23,11 @@ namespace Magenta
 
         void PushLayer(Layer* layer);
 
+        uint32_t GetWidth() { return m_Width; }
+        uint32_t GetHeight() { return m_Height; }
+
+        std::shared_ptr<Renderer> GetRenderer() { return m_Renderer; }
+
     private:
         bool WindowShouldClose();
 
@@ -33,7 +38,7 @@ namespace Magenta
 
         std::vector<std::unique_ptr<Layer>> m_Layers;
 
-        std::unique_ptr<Renderer> m_Renderer;
+        std::shared_ptr<Renderer> m_Renderer;
     };
 
     // To be defined in CLIENT

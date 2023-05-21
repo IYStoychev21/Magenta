@@ -3,6 +3,9 @@
 
 namespace Magenta
 {
+    uint32_t screenWidth = 0;
+    uint32_t screenHeight = 0;
+
     Application::Application()
     {
 
@@ -22,6 +25,9 @@ namespace Magenta
     {
         m_Width = width;
         m_Height = height;
+
+        screenWidth = width;
+        screenHeight = height;
 
         glfwInit();
 

@@ -3,6 +3,8 @@
 
 namespace Magenta
 {
+    class Application;
+    
     class Layer
     {
     public:
@@ -17,7 +19,7 @@ namespace Magenta
     class MagentaLayer : public Layer
     {
     public:
-        MagentaLayer(Renderer* renderer = nullptr) { m_Renderer = renderer; } 
+        MagentaLayer(Application* app) {m_Application = app;} 
         ~MagentaLayer() = default;
 
         virtual void OnAttach() = 0;
@@ -25,6 +27,6 @@ namespace Magenta
         virtual void OnUpdate() = 0;
 
     protected:
-        Renderer* m_Renderer = nullptr;
+        Application* m_Application = nullptr;
     };
 }
