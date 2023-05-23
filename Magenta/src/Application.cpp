@@ -46,6 +46,9 @@ namespace Magenta
             glfwTerminate();
         }
 
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_BLEND);
+
         m_Renderer.reset(Renderer2D::CreateRenderer2D());
 
         for(auto& layer : m_Layers)

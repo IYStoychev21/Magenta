@@ -16,6 +16,9 @@ namespace Magenta
 
         void Bind(uint32_t slot = 0);
         void SetBlendMode(uint32_t mode) { blendMode = mode; }
+
+        uint32_t GetWidth() { return m_Width; }
+        uint32_t GetHeight() { return m_Height; }
     private:
         std::string m_Path;
         uint32_t m_TextureID;

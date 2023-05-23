@@ -3,8 +3,10 @@
 #include "GL/glew.h"
 #include <GLFW/glfw3.h>
 
-#include <cstdint>
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
+#include <cstdint>
 #include <vector>
 #include <memory>
 
@@ -25,7 +27,6 @@ namespace Magenta
 
         void DrawTriangle2D(glm::vec2 pointA, glm::vec2 pointB, glm::vec2 pointC, glm::vec4 color);
         void DrawBox2D(glm::vec2 position, glm::vec2 size, glm::vec4 color);
-        void DrawCirle2D(glm::vec2 position, float radius, glm::vec4 color);
         void DrawLine2D(glm::vec2 pointA, glm::vec2 pointB, float thickness, glm::vec4 color);
         void DrawImage2D(glm::vec2 position, glm::vec2 size, std::shared_ptr<Image> image);
 

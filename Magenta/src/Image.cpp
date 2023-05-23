@@ -11,6 +11,9 @@ namespace Magenta
         stbi_set_flip_vertically_on_load(1);
         stbi_uc* data = stbi_load(path.c_str(), &width, &height, &channels, 4);
 
+        m_Width = width;
+        m_Height = height;
+
         glGenTextures(1, &m_TextureID);
         glBindTexture(GL_TEXTURE_2D, m_TextureID);
 
