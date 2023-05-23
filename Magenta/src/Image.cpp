@@ -24,11 +24,8 @@ namespace Magenta
             else if(channels == 4)
                 format = GL_RGBA;
 
-            // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
-            // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-
-            glTextureParameteri(m_TextureID, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-            glTextureParameteri(m_TextureID, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+            glTextureParameteri(m_TextureID, GL_TEXTURE_MIN_FILTER, blendMode);
+            glTextureParameteri(m_TextureID, GL_TEXTURE_MAG_FILTER, blendMode);
 
             glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
             glGenerateMipmap(GL_TEXTURE_2D);
