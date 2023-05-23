@@ -34,8 +34,9 @@ public:
 
     void OnUpdate() override
     {
-        m_Renderer->DrawBox2D(glm::vec2(-0.375f, -0.375f), glm::vec2(0.75f, 0.75f), glm::vec4(0.8f, 0.2f, 0.3f, 1.0f));
-        // m_Renderer->DrawTexture2D(glm::vec2(-0.375f, -0.375f), glm::vec2(0.75f, 0.75f), "assets/board.png");
+        // m_Renderer->DrawBox2D(glm::vec2(-0.375f, -0.375f), glm::vec2(0.75f, 0.75f), glm::vec4(0.8f, 0.2f, 0.3f, 1.0f));
+        std::shared_ptr<Magenta::Image> image = std::make_shared<Magenta::Image>("SandBox/assets/vscode.png");
+        m_Renderer->DrawImage2D(glm::vec2(-0.5f, -0.5f), glm::vec2(1.0f, 1.0f), image);
 
         m_Renderer->ClearColor(0.8f, 0.8f, 0.8f, 1.0f);
     }
@@ -48,7 +49,7 @@ Magenta::Application* Magenta::CreateApplication()
 {
     SandBox* app = new SandBox();
     app->PushLayer(new SandBoxLayer(app));
-    app->InitWindow(1280, 720, "SandBox");
+    app->InitWindow(800, 800, "SandBox");
 
     return app;
 }
