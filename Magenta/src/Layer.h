@@ -4,19 +4,8 @@
 namespace Magenta
 {
     class Application;
-    
-    class Layer
-    {
-    public:
-        Layer() = default;
-        virtual ~Layer() = default;
 
-        virtual void OnAttach() = 0;
-        virtual void OnDetach() = 0;
-        virtual void OnUpdate() = 0;
-    };
-
-    class MagentaLayer : public Layer
+    class MagentaLayer
     {
     public:
         MagentaLayer(Application* app) {m_Application = app;} 
@@ -28,5 +17,22 @@ namespace Magenta
 
     protected:
         Application* m_Application = nullptr;
+    };
+
+    class ImGuiLayer
+    {
+    public:
+        ImGuiLayer() = default;
+        ~ImGuiLayer() = default;
+
+        virtual void OnAttach() = 0;
+        virtual void OnDetach() = 0;
+        virtual void Render() = 0;
+
+        std::string GetName() { return m_Name; }
+        void SetName(std::string name) { m_Name = name; }
+
+    protected:
+        std::string m_Name= "Layer";
     };
 }

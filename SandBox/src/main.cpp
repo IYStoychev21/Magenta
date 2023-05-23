@@ -45,13 +45,33 @@ private:
     std::shared_ptr<Magenta::Renderer2D> m_Renderer2D = m_Application->GetRenderer2D();
 };
 
+class SandBoxImGuiLayer : public Magenta::ImGuiLayer
+{
+public:
+    void OnAttach() override
+    {
+        SetName("SandBoxImGuiLayer");
+    }
+
+    void OnDetach() override
+    {
+
+    }
+
+    void Render() override
+    {
+        ImGui::Text("Hello World");
+    }
+};
+
 Magenta::Application* Magenta::CreateApplication()
 {
     // Create a new application
     SandBox* app = new SandBox();
 
     // Push all layers
-    app->PushLayer(new SandBoxLayer(app));
+    app->PushMagentaLayer(std::make_shared<SandBoxLayer>(app));
+    app->PushImGuiLayer(std::make_shared<SandBoxImGuiLayer>());
 
     // Initialize the window
     app->InitWindow(1280, 720, "SandBox");

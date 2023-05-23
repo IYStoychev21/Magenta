@@ -13,7 +13,12 @@ namespace Magenta
 
     Application::~Application()
     {
-        for(auto& layer : m_Layers)
+        for(auto& layer : m_MagentaLayers)
+        {
+            layer->OnDetach();
+        }
+
+        for(auto& layer : m_ImGuiLayers)
         {
             layer->OnDetach();
         }
@@ -55,7 +60,14 @@ namespace Magenta
 
         m_Renderer.reset(Renderer2D::CreateRenderer2D());
 
-        for(auto& layer : m_Layers)
+        SetUpImGui();
+
+        for(auto& layer : m_MagentaLayers)
+        {
+            layer->OnAttach();
+        }
+
+        for(auto& layer : m_ImGuiLayers)
         {
             layer->OnAttach();
         }
@@ -69,13 +81,8 @@ namespace Magenta
         return shouldClose;
     }
 
-    void Application::PushLayer(Layer* layer)
+    void Application::SetUpImGui()
     {
-        m_Layers.push_back(std::unique_ptr<Layer>(layer));
-    }
-
-    void Application::Run()
-    {  
         ImGui::CreateContext();
         ImGuiIO& io = ImGui::GetIO(); (void)io;
         io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // Enable Docking
@@ -83,7 +90,10 @@ namespace Magenta
 
         ImGui_ImplGlfw_InitForOpenGL(m_Window, true);
         ImGui_ImplOpenGL3_Init("#version 450");
+    }
 
+    void Application::Run()
+    {  
         while (!WindowShouldClose())
         {
 
@@ -91,21 +101,20 @@ namespace Magenta
             ImGui_ImplGlfw_NewFrame();
             ImGui::NewFrame();
 
-            ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
+            // ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
             
-            ImGui::Begin("Hello, world!");
-            ImGui::Text("This is some useful text.");
-            ImGui::End();
-
-            ImGui::Begin("Another Window");
-            ImGui::Text("Hello");
-            ImGui::End();
+            for(auto& layer : m_ImGuiLayers)
+            {
+                ImGui::Begin(layer->GetName().c_str());
+                layer->Render();
+                ImGui::End();
+            }
 
             ImGui::Render();
 
             m_Renderer->Clear();
 
-            for(auto& layer : m_Layers)
+            for(auto& layer : m_MagentaLayers)
             {
                 layer->OnUpdate();
             }
