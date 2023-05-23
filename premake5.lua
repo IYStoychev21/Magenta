@@ -30,7 +30,9 @@ project "SandBox"
       "Magenta/src",
       "vendor/GLEW/include",
       "vendor/glm",
-      "vendor/stb_image"
+      "vendor/stb_image",
+      "vendor/imgui/",
+      "vendor/imgui/backends"
     }
 
     
@@ -45,7 +47,8 @@ project "SandBox"
       "Magenta",
       "glfw3dll",
       "opengl32",
-      "glew32"
+      "glew32",
+      "ImGUI"
     }
     
     postbuildcommands
@@ -89,7 +92,9 @@ project "Magenta"
       "vendor/glad/include",
       "vendor/GLEW/include",
       "vendor/glm",
-      "vendor/stb_image"
+      "vendor/stb_image",
+      "vendor/imgui/",
+      "vendor/imgui/backends",
     }
 
     libdirs
@@ -102,7 +107,8 @@ project "Magenta"
     {
       "glfw3dll",
       "opengl32",
-      "glew32"
+      "glew32",
+      "ImGUI"
     }
     
     cppdialect "C++20"
@@ -116,4 +122,45 @@ project "Magenta"
     filter "configurations:Release"
       defines "MG_BUILD"
       optimize "On"
-  
+ 
+project "ImGUI"
+    location "vendor/imgui"
+    kind "StaticLib"
+    language "C++"
+    
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+    
+    files
+    {
+      "vendor/imgui/*.cpp",
+      "vendor/imgui/*.h",
+      "vendor/imgui/backends/imgui_impl_glfw.cpp",
+      "vendor/imgui/backends/imgui_impl_glfw.h",
+      "vendor/imgui/backends/imgui_impl_opengl3.cpp",
+      "vendor/imgui/backends/imgui_impl_opengl3.h"
+    }
+    
+    includedirs
+    {
+      "vendor/imgui",
+      "vendor/imgui/backends",
+      "vendor/GLFW/include",
+    }
+
+    libdirs
+    {
+      "vendor/GLFW/lib",
+      "vendor/GLEW/lib"
+    }
+
+    links
+    {
+      "glfw3",
+      "opengl32",
+      "glew32"
+    }
+ 
+    cppdialect "C++20"
+    staticruntime "On"
+    systemversion "latest"

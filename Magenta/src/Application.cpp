@@ -19,6 +19,10 @@ namespace Magenta
         }
 
         glfwTerminate();
+
+        ImGui_ImplOpenGL3_Shutdown();
+        ImGui_ImplGlfw_Shutdown();
+        ImGui::DestroyContext();
     }
 
     void Application::InitWindow(uint32_t width, uint32_t height, const char* title)
@@ -71,15 +75,47 @@ namespace Magenta
     }
 
     void Application::Run()
-    {        
+    {  
+        ImGui::CreateContext();
+        ImGuiIO& io = ImGui::GetIO(); (void)io;
+        io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // Enable Docking
+        io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;    
+
+        ImGui_ImplGlfw_InitForOpenGL(m_Window, true);
+        ImGui_ImplOpenGL3_Init("#version 450");
+
         while (!WindowShouldClose())
         {
+
+            ImGui_ImplOpenGL3_NewFrame();
+            ImGui_ImplGlfw_NewFrame();
+            ImGui::NewFrame();
+
+            ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
+            
+            ImGui::Begin("Hello, world!");
+            ImGui::Text("This is some useful text.");
+            ImGui::End();
+
+            ImGui::Begin("Another Window");
+            ImGui::Text("Hello");
+            ImGui::End();
+
+            ImGui::Render();
+
             m_Renderer->Clear();
 
             for(auto& layer : m_Layers)
             {
                 layer->OnUpdate();
             }
+
+            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+            GLFWwindow* backup_current_context = glfwGetCurrentContext();
+            ImGui::UpdatePlatformWindows();
+            ImGui::RenderPlatformWindowsDefault();
+            glfwMakeContextCurrent(backup_current_context);
 
             glfwSwapBuffers(m_Window);
             glfwPollEvents();

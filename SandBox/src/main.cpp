@@ -34,10 +34,11 @@ public:
 
     void OnUpdate() override
     {
-        std::shared_ptr<Magenta::Image> image = std::make_unique<Magenta::Image>("SandBox/assets/vscode.png");
-        m_Renderer2D->DrawImage2D(glm::vec2(m_Application->GetWidth() / 2 - 250.0f, m_Application->GetHeight() / 2 - 250.0f), glm::vec2(500.0f, 500.0f), image);
+        m_Renderer2D->DrawBox2D(glm::vec2(m_Application->GetWidth() / 2 - 200.0f, m_Application->GetHeight() / 2 - 100.0f), glm::vec2(200.0f, 200.0f), glm::vec4(0.3f, 0.8f, 0.2f, 1.0f));
 
-        m_Renderer2D->ClearColor(0.8f, 0.8f, 0.8f, 1.0f);
+        m_Renderer2D->DrawBox2D(glm::vec2(m_Application->GetWidth() / 2, m_Application->GetHeight() / 2 - 100.0f), glm::vec2(200.0f, 200.0f), glm::vec4(0.3f, 0.2f, 0.8f, 1.0f));
+
+        m_Renderer2D->ClearColor(0.22f, 0.22f, 0.22f, 1.0f);
     }
 
 private:

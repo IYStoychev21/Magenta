@@ -116,7 +116,10 @@ namespace Magenta
         glm::vec2 pointD = mvp * glm::vec4(position.x, position.y + size.y, 0.0f, 1.0f);
 
         float vertices[4 * 2] = {
-            
+            pointA.x, pointA.y,
+            pointB.x, pointB.y,
+            pointC.x, pointC.y,
+            pointD.x, pointD.y
         };
 
         uint32_t indices[] = {
