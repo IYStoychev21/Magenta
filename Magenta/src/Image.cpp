@@ -3,7 +3,7 @@
 
 namespace Magenta
 {
-    Image::Image(std::string path)
+    Image::Image(std::string path, uint32_t format)
     {
         m_Path = path;
 
@@ -19,14 +19,6 @@ namespace Magenta
 
         if(data)
         {
-            GLenum format;
-            if(channels == 1)
-                format = GL_RED;
-            else if(channels == 3)
-                format = GL_RGB;
-            else if(channels == 4)
-                format = GL_RGBA;
-
             glTextureParameteri(m_TextureID, GL_TEXTURE_MIN_FILTER, blendMode);
             glTextureParameteri(m_TextureID, GL_TEXTURE_MAG_FILTER, blendMode);
 
@@ -39,6 +31,21 @@ namespace Magenta
         }
 
         stbi_image_free(data);
+    }
+
+    Image::Image(uint32_t* imageData, glm::vec2 dim, uint32_t format)
+    {
+        m_Width = dim.x;
+        m_Height = dim.y;
+
+        glGenTextures(1, &m_TextureID);
+        glBindTexture(GL_TEXTURE_2D, m_TextureID);
+
+        glTextureParameteri(m_TextureID, GL_TEXTURE_MIN_FILTER, blendMode);
+        glTextureParameteri(m_TextureID, GL_TEXTURE_MAG_FILTER, blendMode);
+
+        glTexImage2D(GL_TEXTURE_2D, 0, format, m_Width, m_Height, 0, format, GL_UNSIGNED_BYTE, imageData);
+        glGenerateMipmap(GL_TEXTURE_2D);
     }
 
     Image::~Image()

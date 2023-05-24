@@ -29,39 +29,37 @@ public:
         m_Renderer2D->ClearColor(0.22f, 0.22f, 0.22f, 1.0f);
     }
 
+    void OnUIRender() override
+    {
+        ImGui::Begin("ViewPort");
+
+        ImGuiStyle& style = ImGui::GetStyle();
+        style.WindowPadding = ImVec2(0.0f, 0.0f);
+
+        for(size_t i = 0; i < 1280 * 720; i++)
+        {
+            m_ImageData[i] = 0xFFA3A2FF;
+        } 
+
+        m_Image = std::make_shared<Magenta::Image>(m_ImageData, glm::vec2(1280, 720), GL_RGBA);
+
+        ImGui::Image((void*)m_Image->GetTextureID(), ImGui::GetContentRegionAvail());
+
+        ImGui::End();
+    }
+
 private:
     std::shared_ptr<Magenta::Renderer2D> m_Renderer2D = m_Application->GetRenderer2D();
-};
-
-class ViewPort : public Magenta::ImGuiLayer
-{
-public:
-    void OnAttach() override
-    {
-        SetName("ViewPort");
-    }
-
-    void OnDetach() override { }
-
-    void Render() override
-    {
-        Magenta::Image* image = new Magenta::Image("SandBox/assets/vscode.png");
-
-        ImGui::Image((void*)image->GetTextureID(), ImGui::GetWindowSize());
-    }
+    std::shared_ptr<Magenta::Image> m_Image;
+    uint32_t* m_ImageData = new uint32_t[m_Application->GetWidth() * m_Application->GetHeight()];
 };
 
 Magenta::Application* Magenta::CreateApplication()
 {
-    // Create a new application
     SandBox* app = new SandBox();
 
-    // Push all layers
-    app->PushMagentaLayer(std::make_shared<SandBoxLayer>(app));
-    app->PushImGuiLayer(std::make_shared<ViewPort>());
-
-    // Initialize the window
     app->InitWindow(1280, 720, "SandBox");
+    app->PushMagentaLayer(std::make_shared<SandBoxLayer>(app));
 
     return app;
 }

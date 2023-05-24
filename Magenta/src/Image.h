@@ -1,6 +1,8 @@
 #pragma once 
 
 #include <stb_image.h>
+#include <glm/glm.hpp>
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
@@ -11,7 +13,8 @@ namespace Magenta
     class Image
     {
     public:
-        Image(std::string path);
+        Image(std::string path, uint32_t format);
+        Image(uint32_t* imageData, glm::vec2 dim, uint32_t format);
         ~Image();
 
         void Bind(uint32_t slot = 0);

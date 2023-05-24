@@ -18,11 +18,6 @@ namespace Magenta
             layer->OnDetach();
         }
 
-        for(auto& layer : m_ImGuiLayers)
-        {
-            layer->OnDetach();
-        }
-
         glfwTerminate();
 
         ImGui_ImplOpenGL3_Shutdown();
@@ -66,11 +61,6 @@ namespace Magenta
         {
             layer->OnAttach();
         }
-
-        for(auto& layer : m_ImGuiLayers)
-        {
-            layer->OnAttach();
-        }
     }
 
     bool Application::WindowShouldClose()
@@ -103,11 +93,9 @@ namespace Magenta
 
             // ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
             
-            for(auto& layer : m_ImGuiLayers)
+            for(auto& layer : m_MagentaLayers)
             {
-                ImGui::Begin(layer->GetName().c_str());
-                layer->Render();
-                ImGui::End();
+                layer->OnUIRender();
             }
 
             ImGui::Render();

@@ -26,7 +26,6 @@ namespace Magenta
         void InitWindow(uint32_t width, uint32_t height, const char* title);
 
         void PushMagentaLayer(std::shared_ptr<MagentaLayer> layer) { m_MagentaLayers.push_back(layer);}
-        void PushImGuiLayer(std::shared_ptr<ImGuiLayer> layer) { m_ImGuiLayers.push_back(layer);}
 
         uint32_t GetWidth() { return m_Width; }
         uint32_t GetHeight() { return m_Height; }
@@ -43,7 +42,6 @@ namespace Magenta
         uint32_t m_Height = 0;
 
         std::vector<std::shared_ptr<MagentaLayer>> m_MagentaLayers;
-        std::vector<std::shared_ptr<ImGuiLayer>> m_ImGuiLayers;
 
         std::shared_ptr<Renderer2D> m_Renderer;
     };
