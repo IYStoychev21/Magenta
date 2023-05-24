@@ -62,8 +62,8 @@ namespace Magenta
             layer->OnAttach();
         }
 
-        FrameBufferSpecification spec{width, height};
-        m_FrameBuffer.reset(new FrameBuffer(spec));
+        m_Spec.reset(new FrameBufferSpecification{m_Width, m_Height});
+        m_FrameBuffer.reset(new FrameBuffer(m_Spec));
     }
 
     bool Application::WindowShouldClose()
@@ -87,8 +87,23 @@ namespace Magenta
 
     void Application::Run()
     {  
+        int32_t newWidth = 0;
+        int32_t newHeight = 0;
+
         while (!WindowShouldClose())
         {
+            glfwGetFramebufferSize(m_Window, &newWidth, &newHeight);
+
+            if(newWidth != m_Width || newHeight != m_Height)
+            {
+                m_Width = newWidth;
+                m_Height = newHeight;
+
+                m_Spec->width = m_Width;
+                m_Spec->height = m_Height;
+
+                m_FrameBuffer->Resize();
+            }
 
             ImGui_ImplOpenGL3_NewFrame();
             ImGui_ImplGlfw_NewFrame();

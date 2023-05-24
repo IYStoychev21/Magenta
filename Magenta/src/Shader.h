@@ -27,6 +27,7 @@ namespace Magenta
 		void SetUniform(ShaderDataType type, std::string uniformName, glm::vec2 value);
 		void SetUniform(ShaderDataType type, std::string uniformName, glm::vec3 value);
 		void SetUniform(ShaderDataType type, std::string uniformName, glm::vec4 value);
+		void SetUniform(ShaderDataType type, std::string uniformName, const glm::mat4& value);
 
         uint32_t GetRendererID() const { return m_RendererID; }
         

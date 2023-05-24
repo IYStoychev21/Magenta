@@ -3,7 +3,9 @@
 #include "GL/glew.h"
 #include <GLFW/glfw3.h>
 
-namespace Magenta{
+#include <memory>
+
+namespace Magenta {
     struct FrameBufferSpecification
     {
         uint32_t width;
@@ -13,7 +15,7 @@ namespace Magenta{
     class FrameBuffer
     {
     public:
-        FrameBuffer(FrameBufferSpecification spec);
+        FrameBuffer(std::shared_ptr<FrameBufferSpecification> spec);
         ~FrameBuffer();
 
         void Bind();
@@ -25,7 +27,7 @@ namespace Magenta{
 
     private:
         uint32_t m_RendererID;
-        FrameBufferSpecification m_Specification;
+        std::shared_ptr<FrameBufferSpecification> m_Specification;
         uint32_t m_ColorAttachment;
         uint32_t m_DepthAttachment;
     };

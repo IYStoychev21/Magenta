@@ -22,9 +22,9 @@ public:
 
     void OnUpdate() override
     {
-        m_Renderer2D->DrawBox(glm::vec2(m_Application->GetWidth() / 2 - 200.0f, m_Application->GetHeight() / 2 - 100.0f), glm::vec2(200.0f, 200.0f), glm::vec4(0.3f, 0.8f, 0.2f, 1.0f));
+        m_Renderer2D->DrawBox({m_Application->GetWidth() / 2 - 200.0f, m_Application->GetHeight() / 2 - 100.0f}, {200.0f, 200.0f}, {0.3f, 0.8f, 0.2f, 1.0f});
 
-        m_Renderer2D->DrawBox(glm::vec2(m_Application->GetWidth() / 2, m_Application->GetHeight() / 2 - 100.0f), glm::vec2(200.0f, 200.0f), glm::vec4(0.3f, 0.2f, 0.8f, 1.0f));
+        m_Renderer2D->DrawBox({m_Application->GetWidth() / 2, m_Application->GetHeight() / 2 - 100.0f}, {200.0f, 200.0f}, {0.3f, 0.2f, 0.8f, 1.0f});
 
         m_Renderer2D->ClearColor(0.22f, 0.22f, 0.22f, 1.0f);
     }

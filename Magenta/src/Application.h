@@ -44,6 +44,7 @@ namespace Magenta
         uint32_t m_Height = 0;
 
         std::shared_ptr<FrameBuffer> m_FrameBuffer;
+        std::shared_ptr<FrameBufferSpecification> m_Spec;
         std::vector<std::shared_ptr<MagentaLayer>> m_MagentaLayers;
 
         std::shared_ptr<Renderer2D> m_Renderer;

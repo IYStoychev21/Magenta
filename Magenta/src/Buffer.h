@@ -12,7 +12,8 @@ namespace Magenta
     enum class ShaderDataType
     {
         Float, Float2, Float3, Float4,
-        Int, Int2, Int3, Int4
+        Int, Int2, Int3, Int4,
+        Mat4
     };
 
     uint32_t GetComponentCount(ShaderDataType type);

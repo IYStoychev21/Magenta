@@ -110,16 +110,11 @@ namespace Magenta
     {
         glm::mat4 mvp = glm::ortho(0.0f, (float)screenWidth, 0.0f, (float)screenHeight, -1.0f, 1.0f);
 
-        glm::vec2 pointA = mvp * glm::vec4(position.x, position.y, 0.0f, 1.0f);
-        glm::vec2 pointB = mvp * glm::vec4(position.x + size.x, position.y, 0.0f, 1.0f);
-        glm::vec2 pointC = mvp * glm::vec4(position.x + size.x, position.y + size.y, 0.0f, 1.0f);
-        glm::vec2 pointD = mvp * glm::vec4(position.x, position.y + size.y, 0.0f, 1.0f);
-
         float vertices[4 * 2] = {
-            pointA.x, pointA.y,
-            pointB.x, pointB.y,
-            pointC.x, pointC.y,
-            pointD.x, pointD.y
+            position.x, position.y,
+            position.x + size.x, position.y,
+            position.x + size.x, position.y + size.y,
+            position.x, position.y + size.y 
         };
 
         uint32_t indices[] = {
@@ -162,14 +157,11 @@ namespace Magenta
             #version 450
 
             layout(location = 0) in vec2 a_Position;
-
-            out vec2 v_Position;
+            uniform mat4 u_MVP;
 
             void main()
             {
-                v_Position = a_Position;
-
-                gl_Position = vec4(a_Position, 1.0, 1.0);
+                gl_Position = u_MVP * vec4(a_Position, 1.0, 1.0);
             }
         )";
 
@@ -189,6 +181,7 @@ namespace Magenta
         std::unique_ptr<Shader> shader = std::make_unique<Shader>(vertSource, fragSource);
         shader->Bind();
         shader->SetUniform(ShaderDataType::Float4, "u_Color", color);
+        shader->SetUniform(ShaderDataType::Mat4, "u_MVP", mvp);
 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
     }
