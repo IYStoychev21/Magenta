@@ -19,6 +19,8 @@ namespace Magenta
 
         uint32_t GetWidth() { return m_Width; }
         uint32_t GetHeight() { return m_Height; }
+
+        uint32_t GetTextureID() { return m_TextureID; }
     private:
         std::string m_Path;
         uint32_t m_TextureID;

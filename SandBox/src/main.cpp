@@ -6,15 +6,9 @@
 class SandBox : public Magenta::Application
 {
 public:
-    SandBox()
-    {
+    SandBox() { }
 
-    }
-
-    ~SandBox()
-    {
-
-    }
+    ~SandBox() { }
 };
 
 class SandBoxLayer : public Magenta::MagentaLayer
@@ -22,15 +16,9 @@ class SandBoxLayer : public Magenta::MagentaLayer
 public:
     using MagentaLayer::MagentaLayer; 
 
-    void OnAttach() override
-    {
+    void OnAttach() override { }
 
-    }
-
-    void OnDetach() override
-    {
-
-    }
+    void OnDetach() override { }
 
     void OnUpdate() override
     {
@@ -45,22 +33,21 @@ private:
     std::shared_ptr<Magenta::Renderer2D> m_Renderer2D = m_Application->GetRenderer2D();
 };
 
-class SandBoxImGuiLayer : public Magenta::ImGuiLayer
+class ViewPort : public Magenta::ImGuiLayer
 {
 public:
     void OnAttach() override
     {
-        SetName("SandBoxImGuiLayer");
+        SetName("ViewPort");
     }
 
-    void OnDetach() override
-    {
-
-    }
+    void OnDetach() override { }
 
     void Render() override
     {
-        ImGui::Text("Hello World");
+        Magenta::Image* image = new Magenta::Image("SandBox/assets/vscode.png");
+
+        ImGui::Image((void*)image->GetTextureID(), ImGui::GetWindowSize());
     }
 };
 
@@ -71,7 +58,7 @@ Magenta::Application* Magenta::CreateApplication()
 
     // Push all layers
     app->PushMagentaLayer(std::make_shared<SandBoxLayer>(app));
-    app->PushImGuiLayer(std::make_shared<SandBoxImGuiLayer>());
+    app->PushImGuiLayer(std::make_shared<ViewPort>());
 
     // Initialize the window
     app->InitWindow(1280, 720, "SandBox");
