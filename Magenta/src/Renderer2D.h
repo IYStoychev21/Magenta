@@ -25,10 +25,10 @@ namespace Magenta
         void Clear();
         void ClearColor(float r, float g, float b, float a);
 
-        void DrawTriangle2D(glm::vec2 pointA, glm::vec2 pointB, glm::vec2 pointC, glm::vec4 color);
-        void DrawBox2D(glm::vec2 position, glm::vec2 size, glm::vec4 color);
-        void DrawLine2D(glm::vec2 pointA, glm::vec2 pointB, float thickness, glm::vec4 color);
-        void DrawImage2D(glm::vec2 position, glm::vec2 size, std::shared_ptr<Image> image);
+        void DrawTriangle(glm::vec2 pointA, glm::vec2 pointB, glm::vec2 pointC, glm::vec4 color);
+        void DrawBox(glm::vec2 position, glm::vec2 size, glm::vec4 color);
+        void DrawLine(glm::vec2 pointA, glm::vec2 pointB, float thickness, glm::vec4 color);
+        void DrawImage(glm::vec2 position, glm::vec2 size, std::shared_ptr<Image> image);
 
         static Renderer2D* CreateRenderer2D()
         {

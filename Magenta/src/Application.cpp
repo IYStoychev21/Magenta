@@ -61,6 +61,9 @@ namespace Magenta
         {
             layer->OnAttach();
         }
+
+        FrameBufferSpecification spec{width, height};
+        m_FrameBuffer.reset(new FrameBuffer(spec));
     }
 
     bool Application::WindowShouldClose()
@@ -91,7 +94,7 @@ namespace Magenta
             ImGui_ImplGlfw_NewFrame();
             ImGui::NewFrame();
 
-            // ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
+            ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
             
             for(auto& layer : m_MagentaLayers)
             {
@@ -100,12 +103,16 @@ namespace Magenta
 
             ImGui::Render();
 
+            m_FrameBuffer->Bind();
+
             m_Renderer->Clear();
 
             for(auto& layer : m_MagentaLayers)
             {
                 layer->OnUpdate();
             }
+            
+            m_FrameBuffer->Unbind();
 
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
@@ -116,6 +123,7 @@ namespace Magenta
 
             glfwSwapBuffers(m_Window);
             glfwPollEvents();
+
         }
     }
 }

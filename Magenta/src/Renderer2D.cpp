@@ -26,7 +26,7 @@ namespace Magenta
         glClearColor(r, g, b, a);
     }
 
-    void Renderer2D::DrawTriangle2D(glm::vec2 pointA, glm::vec2 pointB, glm::vec2 pointC, glm::vec4 color)
+    void Renderer2D::DrawTriangle(glm::vec2 pointA, glm::vec2 pointB, glm::vec2 pointC, glm::vec4 color)
     {
         glm::mat4 mvp = glm::ortho(0.0f, 1280.0f, 0.0f, 720.0f, -1.0f, 1.0f);
 
@@ -106,7 +106,7 @@ namespace Magenta
         glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
     }
 
-    void Renderer2D::DrawBox2D(glm::vec2 position, glm::vec2 size, glm::vec4 color)
+    void Renderer2D::DrawBox(glm::vec2 position, glm::vec2 size, glm::vec4 color)
     {
         glm::mat4 mvp = glm::ortho(0.0f, (float)screenWidth, 0.0f, (float)screenHeight, -1.0f, 1.0f);
 
@@ -193,7 +193,7 @@ namespace Magenta
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
     }
 
-    void Renderer2D::DrawLine2D(glm::vec2 pointA, glm::vec2 pointB, float thickness, glm::vec4 color)
+    void Renderer2D::DrawLine(glm::vec2 pointA, glm::vec2 pointB, float thickness, glm::vec4 color)
     {
         glm::mat4 mvp = glm::ortho(0.0f, (float)screenWidth, 0.0f, (float)screenHeight, -1.0f, 1.0f);
 
@@ -271,7 +271,7 @@ namespace Magenta
         glDrawElements(GL_LINES, 2, GL_UNSIGNED_INT, nullptr);
     }
 
-    void Renderer2D::DrawImage2D(glm::vec2 position, glm::vec2 size, std::shared_ptr<Image> image)
+    void Renderer2D::DrawImage(glm::vec2 position, glm::vec2 size, std::shared_ptr<Image> image)
     {
         glm::mat4 mvp = glm::ortho(0.0f, (float)screenWidth, 0.0f, (float)screenHeight, -1.0f, 1.0f);
 

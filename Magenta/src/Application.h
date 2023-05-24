@@ -9,6 +9,7 @@
 
 #include "Layer.h"
 #include "Renderer2D.h"
+#include "FrameBuffer.h"
 
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
@@ -31,6 +32,7 @@ namespace Magenta
         uint32_t GetHeight() { return m_Height; }
 
         std::shared_ptr<Renderer2D> GetRenderer2D() { return m_Renderer; }
+        std::shared_ptr<FrameBuffer> GetFrameBuffer() { return m_FrameBuffer; }
 
     private:
         bool WindowShouldClose();
@@ -41,6 +43,7 @@ namespace Magenta
         uint32_t m_Width = 0;
         uint32_t m_Height = 0;
 
+        std::shared_ptr<FrameBuffer> m_FrameBuffer;
         std::vector<std::shared_ptr<MagentaLayer>> m_MagentaLayers;
 
         std::shared_ptr<Renderer2D> m_Renderer;
