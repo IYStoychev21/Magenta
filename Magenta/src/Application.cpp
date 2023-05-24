@@ -57,11 +57,6 @@ namespace Magenta
 
         SetUpImGui();
 
-        for(auto& layer : m_MagentaLayers)
-        {
-            layer->OnAttach();
-        }
-
         m_Spec.reset(new FrameBufferSpecification{m_Width, m_Height});
         m_FrameBuffer.reset(new FrameBuffer(m_Spec));
     }
@@ -87,6 +82,11 @@ namespace Magenta
 
     void Application::Run()
     {  
+        for(auto& layer : m_MagentaLayers)
+        {
+            layer->OnAttach();
+        }
+
         int32_t newWidth = 0;
         int32_t newHeight = 0;
 
