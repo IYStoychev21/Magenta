@@ -90,8 +90,20 @@ namespace Magenta
         int32_t newWidth = 0;
         int32_t newHeight = 0;
 
+        double lastTime = glfwGetTime();
+        int nbFrames = 0; 
         while (!WindowShouldClose())
         {
+            // Measure speed
+            double currentTime = glfwGetTime();
+            nbFrames++;
+            if ( currentTime - lastTime >= 1.0 ){ // If last prinf() was more than 1 sec ago
+                // printf and reset timer
+                printf("%f ms/frame\n", 1000.0/double(nbFrames));
+                nbFrames = 0;
+                lastTime += 1.0;
+            }
+
             glfwGetFramebufferSize(m_Window, &newWidth, &newHeight);
 
             if(newWidth != m_Width || newHeight != m_Height)
