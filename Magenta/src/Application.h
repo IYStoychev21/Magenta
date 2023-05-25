@@ -8,7 +8,9 @@
 #include <memory>
 
 #include "Layer.h"
-#include "Renderer2D.h"
+#include "buffer.h"
+#include "Shader.h"
+#include "Image.h"
 #include "FrameBuffer.h"
 
 #include <imgui.h>
@@ -31,7 +33,6 @@ namespace Magenta
         uint32_t GetWidth() { return m_Width; }
         uint32_t GetHeight() { return m_Height; }
 
-        std::shared_ptr<Renderer2D> GetRenderer2D() { return m_Renderer; }
         std::shared_ptr<FrameBuffer> GetFrameBuffer() { return m_FrameBuffer; }
 
     private:
@@ -47,7 +48,6 @@ namespace Magenta
         std::shared_ptr<FrameBufferSpecification> m_Spec;
         std::vector<std::shared_ptr<MagentaLayer>> m_MagentaLayers;
 
-        std::shared_ptr<Renderer2D> m_Renderer;
     };
 
     // To be defined in CLIENT

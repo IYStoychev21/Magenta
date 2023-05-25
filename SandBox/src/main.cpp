@@ -20,17 +20,16 @@ public:
 
     void OnDetach() override { }
 
-    void OnUpdate() override
+    void OnUpdate() override 
     {
-        m_Renderer2D->DrawBox({m_Application->GetWidth() / 2 - 400.0f, m_Application->GetHeight() / 2 - 100.0f}, {200.0f, 200.0f}, {0.3f, 0.8f, 0.2f, 1.0f});
+        uint32_t* m_ImageData = new uint32_t[m_Application->GetWidth() * m_Application->GetHeight()];
 
-        // m_Renderer2D->DrawBox({m_Application->GetWidth() / 2 - 200.0f, m_Application->GetHeight() / 2 - 100.0f}, {200.0f, 200.0f}, {0.3f, 0.2f, 0.8f, 1.0f});
-
-        // m_Renderer2D->DrawBox({m_Application->GetWidth() / 2, m_Application->GetHeight() / 2 - 100.0f}, {200.0f, 200.0f}, {0.8f, 0.2f, 0.3f, 1.0f});
-
-        // m_Renderer2D->DrawBox({m_Application->GetWidth() / 2 + 200.0f, m_Application->GetHeight() / 2 - 100.0f}, {200.0f, 200.0f}, {0.8f, 0.2f, 0.8f, 1.0f});
-
-        m_Renderer2D->ClearColor(0.22f, 0.22f, 0.22f, 1.0f);
+        for (size_t i = 0; i < m_Application->GetWidth() * m_Application->GetHeight(); i++)
+        {
+            m_ImageData[i] = 0xFFA5A6F1;
+        }
+        
+        m_Image = std::make_unique<Magenta::Image>(m_ImageData, glm::vec2(m_Application->GetWidth(), m_Application->GetHeight()), GL_RGBA);
     }
 
     void OnUIRender() override
@@ -40,14 +39,13 @@ public:
         ImGuiStyle& style = ImGui::GetStyle();
         style.WindowPadding = ImVec2(0.0f, 0.0f); 
 
-        ImGui::Image((void*)m_FrameBuffer->GetColorAttachment(), ImGui::GetContentRegionAvail());
+        ImGui::Image((void*)m_Image->GetTextureID(), ImGui::GetContentRegionAvail());
 
         ImGui::End();
     }
 
 private:
-    std::shared_ptr<Magenta::Renderer2D> m_Renderer2D = m_Application->GetRenderer2D();
-    std::shared_ptr<Magenta::FrameBuffer> m_FrameBuffer = m_Application->GetFrameBuffer();
+    std::unique_ptr<Magenta::Image> m_Image;
 };
 
 Magenta::Application* Magenta::CreateApplication()

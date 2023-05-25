@@ -53,7 +53,7 @@ namespace Magenta
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_BLEND);
 
-        m_Renderer.reset(Renderer2D::CreateRenderer2D());
+        // m_Renderer.reset(Renderer2D::CreateRenderer2D());
 
         SetUpImGui();
 
@@ -90,19 +90,9 @@ namespace Magenta
         int32_t newWidth = 0;
         int32_t newHeight = 0;
 
-        double lastTime = glfwGetTime();
-        int nbFrames = 0; 
         while (!WindowShouldClose())
         {
-            // Measure speed
-            double currentTime = glfwGetTime();
-            nbFrames++;
-            if ( currentTime - lastTime >= 1.0 ){ // If last prinf() was more than 1 sec ago
-                // printf and reset timer
-                printf("%f ms/frame\n", 1000.0/double(nbFrames));
-                nbFrames = 0;
-                lastTime += 1.0;
-            }
+            glfwPollEvents();
 
             glfwGetFramebufferSize(m_Window, &newWidth, &newHeight);
 
@@ -117,22 +107,9 @@ namespace Magenta
                 m_FrameBuffer->Resize();
             }
 
-            ImGui_ImplOpenGL3_NewFrame();
-            ImGui_ImplGlfw_NewFrame();
-            ImGui::NewFrame();
-
-            ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
-            
-            for(auto& layer : m_MagentaLayers)
-            {
-                layer->OnUIRender();
-            }
-
-            ImGui::Render();
-
             m_FrameBuffer->Bind();
 
-            m_Renderer->Clear();
+            glClear(GL_COLOR_BUFFER_BIT);
 
             for(auto& layer : m_MagentaLayers)
             {
@@ -140,6 +117,19 @@ namespace Magenta
             }
             
             m_FrameBuffer->Unbind();
+            
+            ImGui_ImplOpenGL3_NewFrame();
+            ImGui_ImplGlfw_NewFrame();
+            ImGui::NewFrame();
+
+            ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
+
+            for(auto& layer : m_MagentaLayers)
+            {
+                layer->OnUIRender();
+            }
+
+            ImGui::Render();
 
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
@@ -149,8 +139,6 @@ namespace Magenta
             glfwMakeContextCurrent(backup_current_context);
 
             glfwSwapBuffers(m_Window);
-            glfwPollEvents();
-
         }
     }
 }
