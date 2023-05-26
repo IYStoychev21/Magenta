@@ -35,6 +35,9 @@ namespace Magenta
         uint32_t GetHeight() { return m_Height; }
 
         std::shared_ptr<FrameBuffer> GetFrameBuffer() { return m_FrameBuffer; }
+        std::shared_ptr<InputManager> GetInputManager() { return m_InputManager; }
+
+        void CloseWindow() { glfwSetWindowShouldClose(m_Window, true); }
 
     private:
         bool WindowShouldClose();

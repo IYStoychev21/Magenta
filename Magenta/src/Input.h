@@ -3,8 +3,13 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include <glm/glm.hpp>
+
+#include <cstdint>
+#include <memory>
+
 namespace Magenta{
-    enum class KeyCode
+    enum class KeyCode : uint16_t
     {
         Space = 32,
         Apostrophe = 39, /* ' */
@@ -75,17 +80,40 @@ namespace Magenta{
         Up = 265,
     };
 
+    enum class KeyAction : uint16_t
+    {
+        Press = GLFW_PRESS,
+        Release = GLFW_RELEASE,
+        Repeat = GLFW_REPEAT
+    };
+
+    enum class MouseButton : uint16_t
+	{
+		Button0 = 0,
+		Button1 = 1,
+		Button2 = 2,
+		Button3 = 3,
+		Button4 = 4,
+		Button5 = 5,
+		Left = Button0,
+		Right = Button1,
+		Middle = Button2
+	};
+
     class InputManager 
     {
     public:
         InputManager(GLFWwindow* window);
         ~InputManager();
 
-        bool IsKeyPressed(KeyCode key);
-        bool IsKeyReleased(KeyCode key);
         bool IsKeyDown(KeyCode key);
+        bool IsMouseButtonDown(MouseButton button);
+
+        glm::vec2 GetMousePosition();
+
+        void SetMousePosition(glm::vec2 position);
 
     private:
-        GLFWwindow* m_Window = nullptr;
+        GLFWwindow* m_Window; 
     };
 }

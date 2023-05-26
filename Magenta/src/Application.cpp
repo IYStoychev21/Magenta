@@ -94,11 +94,6 @@ namespace Magenta
         while (!WindowShouldClose())
         {
             glfwPollEvents();
-
-            if(m_InputManager->IsKeyPressed(KeyCode::Escape))
-            {
-                std::cout << "Escape key pressed" << std::endl;
-            }
             
             glfwGetFramebufferSize(m_Window, &newWidth, &newHeight);
 

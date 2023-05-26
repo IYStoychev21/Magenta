@@ -21,14 +21,19 @@ public:
 
     void OnUpdate() override 
     {
-        std::vector<uint32_t> m_ImageData(m_Application->GetWidth() * m_Application->GetHeight());
-
-        for (size_t i = 0; i < m_ImageData.size(); i++)
+        if(m_InputManager->IsKeyDown(Magenta::KeyCode::Escape))
         {
-            m_ImageData[i] = 0xFFA5A6F1;
+            m_Application->CloseWindow();
+        }
+
+        std::vector<uint32_t> imageData(m_Application->GetWidth() * m_Application->GetHeight());
+
+        for (size_t i = 0; i < imageData.size(); i++)
+        {
+            imageData[i] = 0xFFA5A6F1;
         }
         
-        m_Image = std::make_unique<Magenta::Image>(m_ImageData.data(), glm::vec2(m_Application->GetWidth(), m_Application->GetHeight()), GL_RGBA);
+        m_Image = std::make_unique<Magenta::Image>(imageData.data(), glm::vec2(m_Application->GetWidth(), m_Application->GetHeight()), GL_RGBA);
     }
 
     void OnUIRender() override
@@ -44,6 +49,7 @@ public:
     }
 
 private:
+    std::shared_ptr<Magenta::InputManager> m_InputManager = m_Application->GetInputManager();
     std::unique_ptr<Magenta::Image> m_Image;
 };
 

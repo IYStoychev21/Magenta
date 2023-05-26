@@ -17,6 +17,8 @@ namespace Magenta
         default:
             break;
         }
+
+        return 0;
     }
     
     GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
@@ -34,6 +36,8 @@ namespace Magenta
         default:
             break;
         }
+
+        return 0;
     }
     
     uint32_t GetShaderTypeSize(ShaderDataType type)
@@ -51,6 +55,8 @@ namespace Magenta
          default:
               break;
          }
+
+         return 0;
     } 
 
     BufferLayout::BufferLayout(std::vector<BufferElement> elements)
