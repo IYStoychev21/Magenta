@@ -53,3 +53,11 @@ Magenta::Application* Magenta::CreateApplication()
 }
 ```
 - In the CreateApplication function, we must create an instance on the SandBox class, initialize our window, push the layer we created, and return an instance of the SandBox class
+ 
+## 3rd party libaries & Tools
+- [Dear ImGui](https://github.com/ocornut/imgui)
+- [GLFW](https://github.com/glfw/glfw)
+- [stb_image](https://github.com/nothings/stb)
+- [GLM](https://github.com/g-truc/glm)
+- [Premake](https://github.com/premake/premake-core)
+- [GLEW](https://github.com/nigels-com/glew)
