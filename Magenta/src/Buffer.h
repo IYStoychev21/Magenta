@@ -72,11 +72,6 @@ namespace Magenta
         inline void SetBufferLayout(BufferLayout layout) { m_BufferLayout = layout; }
 		inline BufferLayout GetBufferLayout() { return m_BufferLayout; };
 
-        static VertexBuffer* CreateVertexBuffer()
-        {
-            return new VertexBuffer();
-        }
-
     private:
         uint32_t m_RendererID;
         BufferLayout m_BufferLayout;
@@ -90,11 +85,6 @@ namespace Magenta
 
         void Bind();
         void SetData(uint32_t* indicies, uint32_t size);
-
-        static IndexBuffer* CreateIndexBuffer()
-        {
-            return new IndexBuffer();
-        }
 
     private:
         uint32_t m_RendererID;

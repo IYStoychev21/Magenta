@@ -53,12 +53,12 @@ namespace Magenta
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_BLEND);
 
-        // m_Renderer.reset(Renderer2D::CreateRenderer2D());
-
         SetUpImGui();
 
         m_Spec.reset(new FrameBufferSpecification{m_Width, m_Height});
         m_FrameBuffer.reset(new FrameBuffer(m_Spec));
+
+        m_InputManager = std::make_shared<InputManager>(m_Window);
     }
 
     bool Application::WindowShouldClose()
@@ -82,6 +82,7 @@ namespace Magenta
 
     void Application::Run()
     {  
+
         for(auto& layer : m_MagentaLayers)
         {
             layer->OnAttach();
@@ -94,6 +95,11 @@ namespace Magenta
         {
             glfwPollEvents();
 
+            if(m_InputManager->IsKeyPressed(KeyCode::Escape))
+            {
+                std::cout << "Escape key pressed" << std::endl;
+            }
+            
             glfwGetFramebufferSize(m_Window, &newWidth, &newHeight);
 
             if(newWidth != m_Width || newHeight != m_Height)

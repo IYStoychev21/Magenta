@@ -1,7 +1,6 @@
 #include "Magenta.h"
 #include <glm/glm.hpp>
 #include <memory>
-#include "iostream"
 
 class SandBox : public Magenta::Application
 {
@@ -22,14 +21,14 @@ public:
 
     void OnUpdate() override 
     {
-        uint32_t* m_ImageData = new uint32_t[m_Application->GetWidth() * m_Application->GetHeight()];
+        std::vector<uint32_t> m_ImageData(m_Application->GetWidth() * m_Application->GetHeight());
 
-        for (size_t i = 0; i < m_Application->GetWidth() * m_Application->GetHeight(); i++)
+        for (size_t i = 0; i < m_ImageData.size(); i++)
         {
             m_ImageData[i] = 0xFFA5A6F1;
         }
         
-        m_Image = std::make_unique<Magenta::Image>(m_ImageData, glm::vec2(m_Application->GetWidth(), m_Application->GetHeight()), GL_RGBA);
+        m_Image = std::make_unique<Magenta::Image>(m_ImageData.data(), glm::vec2(m_Application->GetWidth(), m_Application->GetHeight()), GL_RGBA);
     }
 
     void OnUIRender() override

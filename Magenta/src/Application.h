@@ -12,6 +12,7 @@
 #include "Shader.h"
 #include "Image.h"
 #include "FrameBuffer.h"
+#include "Input.h"
 
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
@@ -46,8 +47,9 @@ namespace Magenta
 
         std::shared_ptr<FrameBuffer> m_FrameBuffer;
         std::shared_ptr<FrameBufferSpecification> m_Spec;
-        std::vector<std::shared_ptr<MagentaLayer>> m_MagentaLayers;
+        std::shared_ptr<InputManager> m_InputManager;
 
+        std::vector<std::shared_ptr<MagentaLayer>> m_MagentaLayers;
     };
 
     // To be defined in CLIENT
