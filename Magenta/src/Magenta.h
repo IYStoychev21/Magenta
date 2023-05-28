@@ -7,5 +7,3 @@
 #include "Image.h"
 #include "FrameBuffer.h"
 #include "Input.h"
-
-#include "EntryPoint.h"

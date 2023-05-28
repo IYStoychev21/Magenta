@@ -1,4 +1,6 @@
 #include "Magenta.h"
+#include "EntryPoint.h"
+
 #include <glm/glm.hpp>
 #include <memory>
 
