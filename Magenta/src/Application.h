@@ -39,6 +39,8 @@ namespace Magenta
 
         void CloseWindow() { glfwSetWindowShouldClose(m_Window, true); }
 
+        float GetDeltaTime() { return m_DeltaTime; }
+
     private:
         bool WindowShouldClose();
         void SetUpImGui();
@@ -53,6 +55,9 @@ namespace Magenta
         std::shared_ptr<InputManager> m_InputManager;
 
         std::vector<std::shared_ptr<MagentaLayer>> m_MagentaLayers;
+
+        float m_LastFrameTime = 0.0f;
+        float m_DeltaTime = 0.0f;
     };
 
     // To be defined in CLIENT

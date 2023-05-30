@@ -46,6 +46,7 @@ public:
         style.WindowPadding = ImVec2(0.0f, 0.0f); 
 
         ImGui::Image((void*)m_Image->GetTextureID(), ImGui::GetContentRegionAvail());
+        ImGui::Text("deltaTime: %fms", m_Application->GetDeltaTime());
 
         ImGui::End();
     }

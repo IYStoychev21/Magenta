@@ -91,8 +91,15 @@ namespace Magenta
         int32_t newWidth = 0;
         int32_t newHeight = 0;
 
+        float currentFrameTime = 0.0f;
+
+
         while (!WindowShouldClose())
         {
+            currentFrameTime = glfwGetTime();
+            m_DeltaTime = currentFrameTime - m_LastFrameTime;
+            m_LastFrameTime = currentFrameTime;
+
             glfwPollEvents();
             
             glfwGetFramebufferSize(m_Window, &newWidth, &newHeight);
